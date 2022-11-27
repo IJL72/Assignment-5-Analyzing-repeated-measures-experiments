@@ -5,6 +5,8 @@ date: "2022-11-19"
 output: html_document
 editor_options: 
   chunk_output_type: console
+bibliography: referanser.bib
+csl: apa.csl
 ---
 
 # Effekt av styrketrening
@@ -12,8 +14,8 @@ editor_options:
 ### Introduksjon:
 
 
-Den biologiske adaptasjon  til styrketrening hos mennesker varierer med faktorer som volum, intensitet, hvile mellom repetisjoner,  antall set, utvalg og rekkefølge på øvelser og hyppighet av styrkeøkter. (Ratamess et al.2009) Genetisk variasjon og miljøfaktorer  er også medvirkende årsaker til  variasjonen i adaptasjon. (Timmons,2011; Morton et al. 2018; Seaborne et al. 2018)
-Det er vist at individuell respons på styrketrening, herunder muskelstyrke og -masse,  er korrelert  med både akutte treningsfase  og hvile-fase endringer  i muskelcellene (Terzis et al.2008; Raue et al. 2012; Thalacker-Mercer et al 2013; Stec et al. 2016). Hos høy-respondere ser man en høyere rRNA-stigning enn hos lav-responderne.(Stec.et al 2016; Mobley et al 2018) Muskelfibersammensetning kan også ha betydning for  muskelrespons på styrketrening.  
+Den biologiske adaptasjon  til styrketrening hos mennesker  varierer med faktorer som volum, intensitet, hvile mellom repetisjoner,  antall set, utvalg og rekkefølge på øvelser og hyppighet av styrkeøkter. (Ratamess et al.2009)  Det er også en individuell  forskjell i respons som  skyldes genetisk variasjon og miljøfaktorer. (Timmons,2011; Morton et al. 2018; Seaborne et al. 2018)
+Den individuell responsen på styrketrening, herunder muskelstyrke og -masse,  er korrelert  med både akutte treningsfase  og hvile-fase endringer  i muskelcellene (Terzis et al.2008; Raue et al. 2012; Thalacker-Mercer et al 2013; Stec et al. 2016). Hos høy-respondere ser man en høyere rRNA-stigning enn hos lav-responderne.(Stec.et al 2016; Mobley et al 2018) Muskelfibersammensetning kan også ha betydning for  muskelrespons på styrketrening.  
 Med treningsvolum menes den totale belastningen man utsetter muskulaturen for gjennom vekt/load, antall repetisjoner og sett. I denne  studien, ser vi på  effekt av ulike antall sett ved hver treningsøkt.
 Muskelmassen er  den totale masse skjelettmuskulaturhos testpersonene. Styrke defineres  som evnen en muskel eller muskelgruppe har til å utvikle kraft.  1RM er den vekt man kan løfte maximalt 1 repetisjon. 
 
@@ -41,7 +43,8 @@ Det er benyttet ANCOVA modell for å  beregne p-verdi og tolke  effekt på muske
 
 ### Resultater:
 #### Kroppssammensetning
-Det ses  en signifikant endring i  fettfri masse i bein  i gruppen som gjennomførte tre sett 3.32% (± 4.39%) sammenlignet med de beina som gjennomførte ett sett 2.04% (± 3.71%). Statistisk signifikansverdi p < 0.05.
+Det ses  en signifikant endring i  fettfri masse i bein  i gruppen som gjennomførte tre sett 3.37% (± 4.59%) sammenlignet med de beina som gjennomførte ett sett 2.05% (± 3.62%). Statistisk signifikansverdi p < 0.05.
+
 
 
 
@@ -56,12 +59,7 @@ library(tidyverse)
 library(modelr)
 library(gt)
 library(gtExtras)
-library(knitr)
-library(kableExtra)
-library(flextable)
-library(lmerTest) 
-library(lme4)
-library(emmeans)
+
 
 
 data("dxadata"); data("strengthvolume")
@@ -105,8 +103,6 @@ dat<- dxadata %>%
          pre_mc = pre - mean(pre)) %>% 
   mutate(pros_change = ((post-pre) /pre) *100) %>% 
   filter(!is.na(lbmleg_change)) 
-  
-
   
 
 ```
@@ -169,7 +165,7 @@ dat %>%
 #| echo: false
 #| warning: false
 #| message: false
-#| tbl-cap: "Sammenligner endringer i fettfri masse hos deltakerne og lager figur"
+#| tbl-cap: "Sammenligner endringer i fettfri masse hos deltakerne og lager figur. Gruppert i farge"
 
 
 mod.dxa <- dxadata %>%
@@ -199,93 +195,17 @@ mod.dxa %>%
 #| warning: false
 #| message: false
 #| tbl-cap: "ANCOVA"
-#| tbl-subcap: "Lager datasett med endring og tilpasser model"
+#| tbl-subcap: "tilpasser model"
 
-
-dat <- strengthvolume %>%
-  filter(exercise == c("legpress","legext") %>% 
-         time %in% c("pre", "post")) %>%
-  pivot_wider(names_from = time, 
-              values_from = load) %>%
-  mutate(change = post - pre, 
-         pre = pre - mean(pre)) 
 
 
 m1 <- lm(post ~ pre + sets, data = dat)
 
-m2 <- lm(change ~ pre + sets, data = dat)
-
-
 summary(m1)
-summary(m2)
-
-
-m3 <- aov(post ~ pre + sets, data = dat)
-
-summary(m3)
 anova(m1)
 
 ```
 
-
-```{r}
-
-#| echo: false
-#| warning: false
-#| message: false
-
-m1 <- strengthvolume %>%
-  filter(exercise == c("legpress", "legext") %>%  
-         time %in% c("pre", "post")) %>%
-  pivot_wider(names_from = "time", values_from = "load") %>%
-  mutate(change = post - pre) %>%
-  lm(post ~ pre + sets, data = .) 
-
-
-strengthvolume %>%
-  filter(exercise == c("legpress","legext") %>%  
-         time %in% c("pre", "post")) %>%
-    pivot_wider(names_from = "time", values_from = "load") %>%
-  ggplot(aes(pre, post, color = sets)) + geom_point() + 
-  scale_color_manual(values = c("red", "blue")) +
-  geom_abline(intercept = coef(m1)[1], slope = coef(m1)[2], color = "red")  + 
-  geom_abline(intercept = coef(m1)[1] + coef(m1)[3], slope = coef(m1)[2], color = "blue") + 
-  labs(title = "Estimater fra en ANCOVA modell", 
-       subtitle = "post ~ pre + sets", 
-       color = "Sets") + theme_classic()
-```
-
-
-```{r}
-
-
-m0 <- strengthvolume %>%
-  filter(exercise == c("legpress", "legext") %>%  
-         time %in% c("pre", "post")) %>%
-  pivot_wider(names_from = "time", values_from = "load") %>%
-  mutate(change = post - pre) %>%
-  lm(post ~ sets, data = .) 
-
-m2 <- strengthvolume %>%
-  filter(exercise == c("legpress", "legext") %>% 
-         time %in% c("pre", "post")) %>%
-  pivot_wider(names_from = "time", values_from = "load") %>%
-  mutate(change = post - pre) %>%
-  lm(change ~ sets, data = .) 
-
-
-
-bind_rows(data.frame(emmeans(m0, specs = ~ sets)) %>%
-        mutate(Model = "post only"), 
-        data.frame(emmeans(m2, specs = ~ sets)) %>%
-        mutate(Model = "ANCOVA")) %>%
-        ggplot(aes(sets, emmean, fill = Model)) + 
-        geom_errorbar(aes(ymin = emmean, ymax = emmean + SE), 
-                      position = position_dodge(), width = 0.5) +
-        geom_bar(stat = "identity", position = position_dodge(), 
-                 width = 0.5)  
-
-```
 
 
 
@@ -385,9 +305,9 @@ str.mod %>%
   mutate(time = factor(time, levels = c("pre", "post")),
          group = factor(sets, levels = c("Single", "Multiple"))) %>%
  ggplot(aes(time, combined.load, group = paste(participant, sets), color = sets)) + geom_line() + theme_bw() + labs(title = "Figur 2: Endring i styrke",
-       y = "Endring i styrke (combined load)",
+       y = "Endring i styrke",
        x = "Time",
-       caption = " Endring i styrke  vist i grupper")
+       caption = "Endring i styrke  vist i grupper")
 
 ```
 
@@ -399,81 +319,19 @@ str.mod %>%
 #| tbl-cap "ANCOVA"
 #| tbl-cap: "Endring i  muskelsstyrke"
 
-m4 <- lm(post ~ pre + sets, data = str.dat)
-
-m5 <- lm(change ~ pre + sets, data = str.dat)
-
-
-summary(m4)
-summary(m5)
-
-
-m6 <- aov(post ~ pre + sets, data = str.dat)
-
-summary(m3)
-anova(m1)
+m2 <- lm(post ~ pre + sets, data = str.dat)
 
 summary(m2)
 plot(m2)
 confint(m2)
-```
 
-```{r}
+m3 <- aov(post ~ pre + sets, data = str.dat)
 
-m4 <- strengthvolume %>%
-  filter(exercise == c("legpress","legext"), 
-         time %in% c("pre", "post")) %>%
-  pivot_wider(names_from = "time", values_from = "load") %>%
-  mutate(change = post - pre) %>%
-  lm(post ~ pre + sets, data = .) 
+summary(m3)
+anova(m3)
 
-
-strengthvolume %>%
-  filter(exercise == c("legpress", "legext"), 
-         time %in% c("pre", "post")) %>%
-    pivot_wider(names_from = "time", values_from = "load") %>%
-  ggplot(aes(pre, post, color = sets)) + geom_point() + 
-  scale_color_manual(values = c("red", "blue")) +
-  geom_abline(intercept = coef(m1)[1], slope = coef(m1)[2], color = "red")  + 
-  geom_abline(intercept = coef(m1)[1] + coef(m1)[3], slope = coef(m1)[2], color = "blue") + 
-  labs(title = "Estimater fra en ANCOVA modell - styrke", 
-       subtitle = "post ~ pre + sets", 
-       color = "sets") + theme_classic()
-```
-
-
-```{r}
-
-library(emmeans)
-
-m0 <- strengthvolume %>%
-  filter(exercise == c("legpress","legext"), 
-         time %in% c("pre", "post")) %>%
-  pivot_wider(names_from = "time", values_from = "load") %>%
-  mutate(change = post - pre) %>%
-  lm(post ~ sets, data = .) 
-
-m5 <- strengthvolume %>%
-  filter(exercise == c("legpress","legext"), 
-         time %in% c("pre", "post")) %>%
-  pivot_wider(names_from = "time", values_from = "load") %>%
-  mutate(change = post - pre) %>%
-  lm(change ~ sets, data = .) 
-
-
-
-bind_rows(data.frame(emmeans(m0, specs = ~ sets)) %>%
-        mutate(Model = "Post only"), 
-        data.frame(emmeans(m4, specs = ~ sets)) %>%
-        mutate(Model = "ANCOVA")) %>%
-        ggplot(aes(sets, emmean, fill = Model)) + 
-        geom_errorbar(aes(ymin = emmean, ymax = emmean + SE), 
-                      position = position_dodge(), width = 0.5) +
-        geom_bar(stat = "identity", position = position_dodge(), 
-                 width = 0.5)  
 
 ```
-
 
 
 
@@ -481,11 +339,45 @@ bind_rows(data.frame(emmeans(m0, specs = ~ sets)) %>%
 ### Diskusjon
 
 Resultatene tyder på at tre sett med styrketrening gir et bedre respons både  på styrke og  muskelvekst sammenlignet med ett sett over en 12 ukers periode.  
-Den totale treningsbelastingen i multiple-set-gruppen er  høyere  enn i single-set-gruppen, og man vil også forvente en dosis-respons økning i  både styrke og muskelmasse.
-Vår studie benytter  within-subject-design, hvor  hver  deltaker er sin egen kontroll.  Med dette reduserer vi risiko for bias. 
+Den totale treningsbelastingen i multiple-set-gruppen er  høyere  enn i single-set-gruppen, og man vil forvente en dosis-respons økning i  både styrke og muskelmasse. Andre studier  har ikke vist samme forskjell på 1 og 3 setts trening 
+Vår studie benytter  within-subject-design, hvor  hver  deltaker er sin egen kontroll hvilket  reduserer  risiko for bias. 
 
 
 ### Konklusjon
 
-Våre funn  støtter hypotesen  vå om av det gir et bedre respons på styrketrening og muskelmasse med tre sett styrketrening  sammenlignet med ett sett. 
+Våre funn  støtter hypotesen om av tre sett styrketrening gir et bedre respons på styrketrening og muskelmasse  sammenlignet med ett sett. 
 
+````
+### References
+
+::: {#refs}
+:::
+
+RESISTANCE TRAINING PERFORMED WITH SINGLE AND MULTIPLE SETS INDUCES SIMILAR IMPROVEMENTS IN MUSCULAR STRENGTH, MUSCLE MASS, MUSCLE QUALITY, AND IGF-1 IN OLDER WOMEN: A RANDOMIZED CONTROLLED TRIAL.
+Authors:
+CUNHA, PAOLO M.1
+NUNES, JOÃO PEDRO1joaonunes.jpn@hotmail.com
+TOMELERI, CRISIELI M.1
+NASCIMENTO, MATHEUS A.1,2
+SCHOENFELD, BRAD J.3
+ANTUNES, MELISSA1
+GOBBO, LUIS ALBERTO1,4
+TEIXEIRA, DENILSON1
+CYRINO, EDILSON S.1
+Source:
+Journal of Strength & Conditioning Research Apr2020, Vol. 34 Issue 4, p1008 9p.
+
+:::
+
+Effects of Different Resistance Training Loads on the Muscle Quality Index in Older Women.
+Authors:
+Ribeiro, Alex S.1 (AUTHOR)
+Picoloto, Alexandre1,2 (AUTHOR)
+Nunes, João Pedro2 (AUTHOR) joaonunes.jpn@hotmail.com
+Bezerra, Ewertton S.3 (AUTHOR)
+Schoenfeld, Brad J.4 (AUTHOR)
+Cyrino, Edilson S.2 (AUTHOR)
+Source:
+Journal of Strength & Conditioning Research. May2022, Vol. 36 Issue 5, p1445-1449. 5p.
+
+:::
