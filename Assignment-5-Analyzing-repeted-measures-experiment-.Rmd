@@ -6,7 +6,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 bibliography: referanser.bib
-csl: apa.csl
+
 ---
 
 # Effekt av styrketrening
@@ -19,7 +19,7 @@ Den individuell responsen på styrketrening, herunder muskelstyrke og -masse,  e
 Med treningsvolum menes den totale belastningen man utsetter muskulaturen for gjennom vekt/load, antall repetisjoner og sett. I denne  studien, ser vi på  effekt av ulike antall sett ved hver treningsøkt.
 Muskelmassen er  den totale masse skjelettmuskulaturhos testpersonene. Styrke defineres  som evnen en muskel eller muskelgruppe har til å utvikle kraft.  1RM er den vekt man kan løfte maximalt 1 repetisjon. 
 
-Uansett årsak til at man trener, er det ønskelig med  størst mulig effekt sett i forhold til innsats og for de fleste gjelder dette også tid. Jeg  ønsker å se om det er en forskjell i økning av muskelstyrke ved å gjennomføre  styrketrening i ett sett hhv  flere sett, hvilket vil være tidsbeasparende, og lettere for "folk flest" å kunne gjennomføre. Min  hypotese  er at trening med tre sett vil gi et større respons enn trening med  ett sett.
+Uansett årsak til at man trener, ønskes størst mulig effekt sett i forhold til innsats. Jeg  ønsker å se om det er en forskjell i økning av muskelstyrke ved å gjennomføre  styrketrening i ett sett hhv  flere sett, hvilket vil være tidsbeasparende, og lettere for "folk flest" å kunne gjennomføre. Min  hypotese  er at trening med tre sett vil gi et større respons enn trening med  ett sett.
 
 
 ### Metode:
@@ -27,7 +27,7 @@ Uansett årsak til at man trener, er det ønskelig med  størst mulig effekt set
 Førtien ikke-røykende kvinner (22) og menn (19) mellom 18 og 40 år ble inkludert i studien. Eksklusjonskriterier var  allergi mot lokalanestesi,  treningshistorikk med mer enn en ukentlig styrkeøkt i uka de siste 12 mndr før intervensjonen, fast medikasjon som ville  kunne ha innvirkning på adaptasjon til trening og muskelsvekkelse pga tidligere  skader. Syv deltakere, 4 kvinner og 3 menn, ble ekskludert under studiet pga manglede gjennomførte økter (85%). Årsakene til dette var  smerter  eller ubehag i underekstremitetene under trening (n=5), skade ikke relatert til studiet (n=1) og  manglende complience (n=1).
 Alle deltakerne rapporterte at de  hadde erfaring fra trening og  20  av deltakere drev med fysisk aktivitet før intervensjonsstart, men ikke ukentlig styrketrening. 
 
-Intervensjonen varte  12 uker og besto av fullkropps- styrketrening. Benøvelsene ble utført unilateralt for å  se eventuell forskjell hos hver enkelt deltaker. For hver deltaker ble beina randomisert til å gjennomføre  enten 1 (single-set) eller 3 (multiple-set) sett med styrketrenig. Alle deltakere gjennomførte begge protokoller.  Det ble testet muskelstyrke ved baseline, og underveis (uke 3,5 og 9). Dexa ble tatt før og etter intervensjon, og det ble tatt muskelbiopsier fra vastus lateralis fra begge bein fire ganger - Ved base-line (hvilefase),  uke 2 (før og  1 t etter trening) og uke 12 (hvilefase). MR av m. quadriceps femoris ble utført før og etter interensjon.  Det ble tatt blodprøver, parallelt med muskelbiopsiene og 10 minutter etter  den  femte treningsøkten.  Blodprøvene ble analysert for  tot-testosteron,kortisol, veksthormon og IGF-1, og vitamin D ble analysert før og etter intervensjonen. 
+Intervensjonen varte  12 uker og besto av fullkropps- styrketrening. Benøvelsene ble utført unilateralt for å  se eventuell forskjell hos hver enkelt deltaker. For hver deltaker ble beina randomisert til å gjennomføre  enten 1 (single-set) eller 3 (multiple-set) sett med styrketrenig. Alle deltakere gjennomførte begge protokoller.  Det ble testet muskelstyrke ved baseline, og underveis (uke 3,5 og 9). Dexa ble tatt før og etter intervensjon, og det ble tatt muskelbiopsier fra vastus lateralis fra begge bein fire ganger - Ved base-line (hvilefase),  uke 2 (før og  1 t etter trening) og uke 12 (hvilefase). 
 Det ble gjennomført analyse av kroppssammenseting før og etter intervensjonen med Dexa (Lunar Prodigy, GE Healthcare, Oslo, Norway) ihht  standard protokoll.
 
 Før alle treningsøkter, ble det gjennomført et standarisert oppvarmingsprogram, etterfulgt av kroppsvektøvelser (push-ups, situps, rygghev og squats) og ett sett med 10 reps 50% av 1RM av benøvelser. Disse ble utført i samme rekkefølge; unilat. legpress, legcurl og kneekstensjon og i enten 1 sett (single-set) eller 3 sett (multiple-set).
@@ -339,7 +339,9 @@ anova(m3)
 ### Diskusjon
 
 Resultatene tyder på at tre sett med styrketrening gir et bedre respons både  på styrke og  muskelvekst sammenlignet med ett sett over en 12 ukers periode.  
-Den totale treningsbelastingen i multiple-set-gruppen er  høyere  enn i single-set-gruppen, og man vil forvente en dosis-respons økning i  både styrke og muskelmasse. Andre studier  har ikke vist samme forskjell på 1 og 3 setts trening 
+Den totale treningsbelastingen i multiple-set-gruppen er  høyere  enn i single-set-gruppen, og man vil forvente en dosis-respons økning i  både styrke og muskelmasse. @Mangine et al. @Pina et al gjennomførte et studie på eldre kvinner, hvor  de  trente enten to (G2) eller tre (G3)  ganger i uken.  Totalload var altså større for (G3), men det var ingen signifikant  forskjell mellom  gruppene ift hypertrofi og styrke. 
+En metaanalyse av @Refaelo et.al viser at trening med både høy og lav load ga hypertrofi, mens høy load ga større økning i styrke. Dette samsvarer til dels med våre funn. @Lopes Machado et al finner ingen dierke sammenheng mellom intensitet og volum og hypertrofi.
+
 Vår studie benytter  within-subject-design, hvor  hver  deltaker er sin egen kontroll hvilket  reduserer  risiko for bias. 
 
 
@@ -347,37 +349,3 @@ Vår studie benytter  within-subject-design, hvor  hver  deltaker er sin egen ko
 
 Våre funn  støtter hypotesen om av tre sett styrketrening gir et bedre respons på styrketrening og muskelmasse  sammenlignet med ett sett. 
 
-````
-### References
-
-::: {#refs}
-:::
-
-RESISTANCE TRAINING PERFORMED WITH SINGLE AND MULTIPLE SETS INDUCES SIMILAR IMPROVEMENTS IN MUSCULAR STRENGTH, MUSCLE MASS, MUSCLE QUALITY, AND IGF-1 IN OLDER WOMEN: A RANDOMIZED CONTROLLED TRIAL.
-Authors:
-CUNHA, PAOLO M.1
-NUNES, JOÃO PEDRO1joaonunes.jpn@hotmail.com
-TOMELERI, CRISIELI M.1
-NASCIMENTO, MATHEUS A.1,2
-SCHOENFELD, BRAD J.3
-ANTUNES, MELISSA1
-GOBBO, LUIS ALBERTO1,4
-TEIXEIRA, DENILSON1
-CYRINO, EDILSON S.1
-Source:
-Journal of Strength & Conditioning Research Apr2020, Vol. 34 Issue 4, p1008 9p.
-
-:::
-
-Effects of Different Resistance Training Loads on the Muscle Quality Index in Older Women.
-Authors:
-Ribeiro, Alex S.1 (AUTHOR)
-Picoloto, Alexandre1,2 (AUTHOR)
-Nunes, João Pedro2 (AUTHOR) joaonunes.jpn@hotmail.com
-Bezerra, Ewertton S.3 (AUTHOR)
-Schoenfeld, Brad J.4 (AUTHOR)
-Cyrino, Edilson S.2 (AUTHOR)
-Source:
-Journal of Strength & Conditioning Research. May2022, Vol. 36 Issue 5, p1445-1449. 5p.
-
-:::
